@@ -7,7 +7,9 @@ public class Batiment {
 
         // Création de nouveaux bavards liés au concierge
         Bavard charlotte=new Bavard(cyprien);
+        cyprien.ajouter_bavard(charlotte);
         Bavard emma=new Bavard(cyprien);
+        cyprien.ajouter_bavard(emma);
 
        
 
