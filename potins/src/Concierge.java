@@ -18,12 +18,14 @@ public class Concierge {
     
     // Gestion de la reception des messages
     public void recevoir_potin(PapotageEvent potin) {
+        //System.out.println("Message reçu : "+potin.print_message());
         transmettre_potin(potin);
     }
 
     public void transmettre_potin(PapotageEvent potin) {
         for (Bavard bavard : liste_bavards) {
             // chaque bavard de la liste reçoit le potin
+            //System.out.println("Message transmi : "+potin.print_message());
             bavard.recevoir_potin(potin);
         }
     }
