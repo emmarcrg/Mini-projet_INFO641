@@ -17,9 +17,8 @@ public class Bavard implements PapotageListener {
         this.concierge.recevoir_potin(this.message_envoye);
     }
 
-    public String recevoir_potin(PapotageEvent message_recuEvent){
-        this.concierge.transmettre_potin(this.message_recu);
-        return this.message_recu.print_message();
+    public String recevoir_potin(PapotageEvent message_recu){
+        return message_recu.print_message();
     }
 
 }
