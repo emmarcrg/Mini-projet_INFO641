@@ -16,7 +16,7 @@ public class PapotageEvent {
     }
 
     public String print_message (){
-        return "Le sujet "+ this.sujet+". Le message : "+this.corps;
+        return "Message reçu : sujet "+ this.sujet+" - contenu : "+this.corps;
     }
 }
 

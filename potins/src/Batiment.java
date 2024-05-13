@@ -12,7 +12,7 @@ public class Batiment {
         Bavard emma=new Bavard(cyprien);
         cyprien.ajouter_bavard(emma);
 
-       
+       emma.transmettre_potin(new PapotageEvent("thomas", "pas de nouvelles"));
 
     }
 
