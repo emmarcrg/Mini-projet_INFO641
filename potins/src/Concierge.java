@@ -21,7 +21,7 @@ public class Concierge {
         transmettre_potin(potin);
     }
 
-    private void transmettre_potin(PapotageEvent potin) {
+    public void transmettre_potin(PapotageEvent potin) {
         for (Bavard bavard : liste_bavards) {
             // chaque bavard de la liste reçoit le potin
             bavard.recevoir_potin(potin);

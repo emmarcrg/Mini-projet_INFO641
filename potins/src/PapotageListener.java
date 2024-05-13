@@ -1,5 +1,5 @@
 public interface PapotageListener {
-    void transmettre_potins(String sujet, String corps);
-    String recevoir_potins();
+    void transmettre_potin(PapotageEvent potin);
+    String recevoir_potin(PapotageEvent potin);
 }
 

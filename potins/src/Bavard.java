@@ -13,13 +13,12 @@ public class Bavard implements PapotageListener {
         return this.concierge;
     }
 
-    public void transmettre_potins(String sujet, String corps){
-        message_envoye.setMessage(sujet,corps);
-        this.concierge.recevoir_potins(this.message_envoye);
+    public void transmettre_potin(PapotageEvent message_envoye){
+        this.concierge.recevoir_potin(this.message_envoye);
     }
 
-    public String recevoir_potins(){
-        this.concierge.transmettre_potins(this.message_recu);
+    public String recevoir_potin(PapotageEvent message_recuEvent){
+        this.concierge.transmettre_potin(this.message_recu);
         return this.message_recu.print_message();
     }
 

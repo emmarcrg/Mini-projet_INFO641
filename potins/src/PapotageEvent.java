@@ -2,6 +2,10 @@ public class PapotageEvent {
     private String sujet;
     private String corps;
 
+    public PapotageEvent(String sj, String cp){
+        this.sujet=sj;
+        this.corps=cp;
+    }
     public PapotageEvent(){
         super();
     }
