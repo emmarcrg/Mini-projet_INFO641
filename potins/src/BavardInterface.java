@@ -1,3 +1,6 @@
-public interface BavardInterface {
+import javax.swing.*;
+
+public class BavardInterface extends JFrame{
+
 
 }
