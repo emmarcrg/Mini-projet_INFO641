@@ -1,7 +1,9 @@
 public class Bavard implements PapotageListener {
     private Concierge concierge;
+    private String nom;
 
-    public Bavard(Concierge concierge){
+    public Bavard(String nom, Concierge concierge){
+        this.nom=nom;
         this.concierge=concierge;
     }
 
@@ -15,6 +17,10 @@ public class Bavard implements PapotageListener {
     
     public void recevoir_potin(PapotageEvent message_recu){
         System.out.println(message_recu.print_message());
+    }
+
+    public String get_nom(){
+        return this.nom;
     }
 
 }

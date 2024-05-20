@@ -11,7 +11,7 @@ public class Batiment {
         this.habitants=new ArrayList<>();
     }
 
-    public String get_nom_batiment(){
+    public String get_nom(){
         return this.nom_batiment;
     }
 
@@ -32,8 +32,11 @@ public class Batiment {
     public void supprimer_habitant(Bavard ancier_habitant){
         this.habitants.remove(ancier_habitant);
     }
-    
 
-    
+    public void creer_bavard(String nom, Concierge concierge){
+        Bavard nouveau_bavard=new Bavard(nom, concierge);
+        habitants.add(nouveau_bavard);
+        System.out.println("Un nouveau bavard a été ajouté au batiment");
+    }
 
 }
