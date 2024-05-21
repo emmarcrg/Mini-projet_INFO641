@@ -222,6 +222,23 @@ public class BatimentInterface extends JFrame implements PapotageListener{
         this.setTitle("Gestion des potins - Concierge");
         zone_affichage.removeAll();
 
+        // on créé l'affichage pour le concierge
+        Color couleur_affichage=Color.decode("#e5f4e3");
+        zone_affichage.setBackground(couleur_affichage);
+        JTextField nom_concierge = new JTextField(batiment.get_concierge().get_prenom());
+        nom_concierge.setBorder(null);
+        nom_concierge.setEditable(false);
+        nom_concierge.setFocusable(false);
+        nom_concierge.setForeground(Color.decode("305252"));
+        nom_concierge.setBackground(couleur_affichage);
+        Font ancienne_ecriture=nom_concierge.getFont();
+        Font nouvelle_ecriture=ancienne_ecriture.deriveFont(20f); 
+        nom_concierge.setFont(nouvelle_ecriture);
+        zone_affichage.add(nom_concierge);
+
+
+
+
         zone_affichage.revalidate();
         zone_affichage.repaint();
     }
