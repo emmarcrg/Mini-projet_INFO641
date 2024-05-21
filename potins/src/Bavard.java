@@ -1,12 +1,18 @@
+import java.awt.event.ActionEvent;
+import java.util.HashMap;
+
+
 public class Bavard implements PapotageListener {
     private Concierge concierge;
     private String nom;
     private Boolean connecte;
+    private HashMap <Bavard, String> messages;
 
     public Bavard(String nom, Concierge concierge){
         this.nom=nom;
         this.concierge=concierge;
-        this.connecte=false;
+        messages=new HashMap<Bavard, String>();
+        this.connecte=false,
     }
 
     public Concierge get_concierge(){
@@ -18,6 +24,7 @@ public class Bavard implements PapotageListener {
     }
     
     public void recevoir_potin(PapotageEvent message_recu){
+        messages.put( message_recu.getEnvoyeur(), message_recu.print_message());
         System.out.println(message_recu.print_message());
     }
 
@@ -37,6 +44,16 @@ public class Bavard implements PapotageListener {
         else{
             System.out.println("Le bavard "+this.get_nom()+" n'est pas connecté au potin");
         }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        //this.recevoir_potin();
+        System.out.println("Le bavard affiche le message");
+    }
+
+    public HashMap<Bavard,String> get_messages(){
+        return this.messages;
     }
 
 }

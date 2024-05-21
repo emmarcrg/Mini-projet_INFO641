@@ -1,3 +1,5 @@
+import java.awt.event.ActionEvent;
+
 public class Test {
     public static void main(String[] args) throws Exception {
         System.out.println("Bienvenue dans le batiment où tous les potins sont permis");   
@@ -18,10 +20,10 @@ public class Test {
 
         batiment.souscription_potin();
         
-        
-        emma.transmettre_potin(new PapotageEvent("thomas", "pas de nouvelles"));
-        charlotte.transmettre_potin(new PapotageEvent("pmb", "ils sont tous nul"));
-        System.out.println("potin : " +cyprien.get_potin());
+        Object source = new Object();
+        emma.transmettre_potin(new PapotageEvent(source, ActionEvent.ACTION_PERFORMED, "command","thomas", "pas de nouvelles",emma));
+        charlotte.transmettre_potin(new PapotageEvent(source, ActionEvent.ACTION_PERFORMED, "command","pmb", "ils sont tous nul", charlotte));
+        //System.out.println("potin : " +cyprien.get_potin());
 
 
         // à faire : extend PapotageListener dans ConciergeInterface pour qu'il puisse détecter l'arrivée des noveaux messages
