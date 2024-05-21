@@ -1,9 +1,11 @@
+import java.awt.event.ActionEvent;
+
 public class Test {
     public static void main(String[] args) throws Exception {
-        /*System.out.println("Bienvenue dans le batiment où tous les potins sont permis");   
+        System.out.println("Bienvenue dans le batiment où tous les potins sont permis");   
 
         // Création du concierge
-        Concierge cyprien=new Concierge();
+        Concierge cyprien=new Concierge("cyprien");
 
         // Création du batiment
         Batiment batiment = new Batiment("PotinLand", cyprien);
@@ -17,8 +19,8 @@ public class Test {
         batiment.ajouter_habitant(emma);
 
         batiment.souscription_potin();
-        
-        emma.transmettre_potin(new PapotageEvent("thomas", "pas de nouvelles"));*/
+        Object source = new Object();
+        emma.transmettre_potin(new PapotageEvent(source, ActionEvent.ACTION_PERFORMED, "command","thomas", "pas de nouvelles",emma));
 
         BatimentInterface bi = new BatimentInterface();
     }
