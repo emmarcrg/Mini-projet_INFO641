@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -45,4 +46,18 @@ public class Concierge {
     public String get_nom(){
         return this.nom;
     }
+
+    public ArrayList<Bavard> get_liste_bavards(){
+        return this.liste_bavards;
+    }
+
+    public String[] get_nom_bavards(){
+        List<String> noms_bavards=new ArrayList<>();
+        for (Bavard bavard : liste_bavards){
+            noms_bavards.add(bavard.get_nom());
+        }
+        String[] bavards=noms_bavards.toArray(new String[0]);
+        return bavards;
+    }
+
 }
