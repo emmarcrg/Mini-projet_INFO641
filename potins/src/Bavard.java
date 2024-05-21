@@ -12,7 +12,7 @@ public class Bavard implements PapotageListener {
         this.nom=nom;
         this.concierge=concierge;
         messages=new HashMap<Bavard, String>();
-        this.connecte=false,
+        this.connecte=false;
     }
 
     public Concierge get_concierge(){
