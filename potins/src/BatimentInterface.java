@@ -301,12 +301,6 @@ public class BatimentInterface extends JFrame implements PapotageListener{
 //.......//
 
     @Override
-    public void transmettre_potin(PapotageEvent potin) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'transmettre_potin'");
-    }
-
-    @Override
     public void recevoir_potin(PapotageEvent potin) {
         for (Bavard habitant : batiment.get_habitants()){
             if (habitant.get_connection() && habitant!=potin.getEnvoyeur()){
