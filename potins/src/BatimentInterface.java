@@ -309,7 +309,7 @@ public class BatimentInterface extends JFrame implements PapotageListener{
     @Override
     public void recevoir_potin(PapotageEvent potin) {
         for (Bavard habitant : batiment.get_habitants()){
-            if (habitant.get_connection()){
+            if (habitant.get_connection() && habitant!=potin.getEnvoyeur()){
                 String nouveau_message=potin.print_message();
                 System.out.println(nouveau_message);
             } 
