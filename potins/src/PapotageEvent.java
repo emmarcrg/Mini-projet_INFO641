@@ -21,7 +21,7 @@ public class PapotageEvent extends ActionEvent {
     }
 
     public String print_message (){
-        return "Message reçu : sujet "+ this.sujet+" - contenu : "+this.corps;
+        return "sujet "+ this.sujet+" - contenu : "+this.corps;
     }
 
     public String affichage_message(){
