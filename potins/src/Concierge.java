@@ -8,9 +8,10 @@ public class Concierge {
     private HashMap <Bavard, String> messages;
 
     public Concierge(String nom){
-        this.liste_bavards=new ArrayList<>();
+        
         this.nom=nom;
         messages=new HashMap<Bavard, String>();
+        liste_bavards= new ArrayList<>();
     }
 
     // Gestion des bavards
@@ -39,5 +40,9 @@ public class Concierge {
 
     public HashMap<Bavard,String> get_messages(){
         return this.messages;
+    }
+
+    public String get_nom(){
+        return this.nom;
     }
 }

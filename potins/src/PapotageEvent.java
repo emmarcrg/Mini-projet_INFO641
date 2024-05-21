@@ -24,6 +24,10 @@ public class PapotageEvent extends ActionEvent {
         return "Message reçu : sujet "+ this.sujet+" - contenu : "+this.corps;
     }
 
+    public String affichage_message(){
+        return "sujet : "+this.sujet+" - contenu : "+this.corps;
+    }
+
     public Bavard getEnvoyeur(){
         return this.envoyeur;
     }

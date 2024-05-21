@@ -5,25 +5,36 @@ public class Test {
         System.out.println("Bienvenue dans le batiment où tous les potins sont permis");   
 
         // Création du concierge
-        Concierge cyprien=new Concierge("cyprien");
+        Concierge cyprien=new Concierge("Cyprien");
 
         // Création du batiment
-        Batiment batiment = new Batiment("PotinLand", cyprien);
+        Batiment batiment=new Batiment("PotinLand", cyprien);
 
         // Création de nouveaux bavards
-        Bavard charlotte=new Bavard("charlotte",cyprien);
-        Bavard emma=new Bavard("emma", cyprien);
+        Bavard charlotte=new Bavard("Charlotte", cyprien);
+        Bavard emma=new Bavard("Emma", cyprien);
 
         // Ajout des bavard au batiment
         batiment.ajouter_habitant(charlotte);
         batiment.ajouter_habitant(emma);
 
         batiment.souscription_potin();
+        
         Object source = new Object();
         emma.transmettre_potin(new PapotageEvent(source, ActionEvent.ACTION_PERFORMED, "command","thomas", "pas de nouvelles",emma));
-        System.out.println(charlotte.get_messages().toString());
+        charlotte.transmettre_potin(new PapotageEvent(source, ActionEvent.ACTION_PERFORMED, "command","pmb", "ils sont tous nul", charlotte));
+        //System.out.println("potin : " +cyprien.get_potin());
 
-        //BatimentInterface bi = new BatimentInterface();
+
+        // à faire : extend PapotageListener dans ConciergeInterface pour qu'il puisse détecter l'arrivée des noveaux messages
+
+        // Lancement de l'interface :
+
+        BatimentInterface bat = new BatimentInterface(batiment);
+        System.out.println("Ouverture de l'interface graphique");
+        bat.setVisible(true);
+
+
     }
 
 }

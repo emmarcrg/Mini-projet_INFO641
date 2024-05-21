@@ -5,12 +5,14 @@ import java.util.HashMap;
 public class Bavard implements PapotageListener {
     private Concierge concierge;
     private String nom;
+    private Boolean connecte;
     private HashMap <Bavard, String> messages;
 
     public Bavard(String nom, Concierge concierge){
         this.nom=nom;
         this.concierge=concierge;
         messages=new HashMap<Bavard, String>();
+        this.connecte=false;
     }
 
     public Concierge get_concierge(){
@@ -30,8 +32,18 @@ public class Bavard implements PapotageListener {
         return this.nom;
     }
 
-    public void seConnecter(){
-        BavardInterface bav = new BavardInterface(this);
+    public Boolean get_connection(){
+        return this.connecte;
+    }
+
+    public void set_connection(Boolean etat_connection){
+        this.connecte=etat_connection;
+        if (etat_connection){
+        System.out.println("Le bavard "+this.get_nom()+" est connecté au potin");
+        }
+        else{
+            System.out.println("Le bavard "+this.get_nom()+" n'est pas connecté au potin");
+        }
     }
 
     @Override
@@ -43,4 +55,5 @@ public class Bavard implements PapotageListener {
     public HashMap<Bavard,String> get_messages(){
         return this.messages;
     }
+
 }
