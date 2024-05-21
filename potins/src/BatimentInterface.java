@@ -4,6 +4,8 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 public class BatimentInterface extends JFrame implements PapotageListener{ 
     final static int HAUTEUR=500;
@@ -92,7 +94,7 @@ public class BatimentInterface extends JFrame implements PapotageListener{
         JPanel zone_creation_bavard=new JPanel();
         zone_creation_bavard.setBackground(couleur_affichage);
         zone_creation_bavard.setPreferredSize(new Dimension(600, 50));
-        JTextArea nom_bavard= new JTextArea("Entrez le nom du nouveau bavard");
+        JTextArea nom_bavard=new JTextArea("Entrez le nom du nouveau bavard");
         Color fond_bavard=Color.decode("#eAC3CA");
         Color couleur_texte_bavard=Color.decode("#513b56");
         nom_bavard.setBackground(fond_bavard);
@@ -220,12 +222,17 @@ public class BatimentInterface extends JFrame implements PapotageListener{
     public void afficher_zone_concierge(){
         System.out.println("Affichage de l'interface Concierge");
         this.setTitle("Gestion des potins - Concierge");
+        Concierge concierge = batiment.get_concierge();
         zone_affichage.removeAll();
 
         // on créé l'affichage pour le concierge
         Color couleur_affichage=Color.decode("#e5f4e3");
         zone_affichage.setBackground(couleur_affichage);
-        JTextField nom_concierge = new JTextField(batiment.get_concierge().get_nom());
+
+        JPanel zone_nom_concierge=new JPanel();
+        zone_nom_concierge.setPreferredSize(new Dimension(600, 50 ));
+        zone_nom_concierge.setBackground(couleur_affichage);
+        JTextField nom_concierge=new JTextField(concierge.get_nom());
         nom_concierge.setBorder(null);
         nom_concierge.setEditable(false);
         nom_concierge.setFocusable(false);
@@ -234,11 +241,49 @@ public class BatimentInterface extends JFrame implements PapotageListener{
         Font ancienne_ecriture=nom_concierge.getFont();
         Font nouvelle_ecriture=ancienne_ecriture.deriveFont(20f); 
         nom_concierge.setFont(nouvelle_ecriture);
-        zone_affichage.add(nom_concierge);
+        zone_nom_concierge.add(nom_concierge);
+        zone_affichage.add(zone_nom_concierge);
+
+        Color couleur_zone_concierge=Color.decode("#B7D5D4");
+        Color couleur_texte_concierge=Color.decode("#513b56");
+
+        JPanel zone_affichage_messages=new JPanel();
+        zone_affichage_messages.setBackground(couleur_zone_concierge);
+        zone_affichage_messages.setLayout(new BoxLayout(zone_affichage_messages, BoxLayout.Y_AXIS));
+
+        JPanel texte_concierge=new JPanel();
+        texte_concierge.setBackground(couleur_zone_concierge);
+        JTextField texte_liste=new JTextField("Liste des messages reçus :");
+        texte_liste.setBorder(null);
+        texte_liste.setEditable(false);
+        texte_liste.setFocusable(false);
+        texte_liste.setForeground(couleur_texte_concierge);
+        texte_liste.setBackground(couleur_zone_concierge);
+        texte_concierge.add(texte_liste); 
+        zone_affichage_messages.add(texte_concierge);
+        
+        JPanel zone_message=new JPanel();
+        zone_message.setBackground(couleur_zone_concierge);
+        zone_message.setLayout(new BoxLayout(zone_message, BoxLayout.Y_AXIS));
 
 
+        for (Entry<Bavard, String> message : concierge.get_messages().entrySet()){
+            String affichage=message.getKey().get_nom()+" : "+  message.getValue();
+            JPanel panel_message=new JPanel(new FlowLayout(FlowLayout.LEFT));
+            panel_message.setBackground(couleur_zone_concierge);
+            JTextField message_recu=new JTextField(affichage);
+            message_recu.setBorder(null);
+            message_recu.setEditable(false);
+            message_recu.setFocusable(false);
+            message_recu.setForeground(couleur_texte_concierge);
+            message_recu.setBackground(couleur_zone_concierge);
+            panel_message.add(message_recu);
+            zone_message.add(panel_message);
+        }
 
 
+        zone_affichage_messages.add(zone_message);
+        zone_affichage.add(zone_affichage_messages);
         zone_affichage.revalidate();
         zone_affichage.repaint();
     }
