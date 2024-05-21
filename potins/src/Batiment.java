@@ -39,4 +39,8 @@ public class Batiment {
         System.out.println("Un nouveau bavard a été ajouté au batiment");
     }
 
+    public ArrayList<Bavard> get_habitants(){
+        return this.habitants;
+    }
+
 }
