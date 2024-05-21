@@ -39,7 +39,10 @@ public class Bavard implements PapotageListener {
     public void set_connection(Boolean etat_connection){
         this.connecte=etat_connection;
         if (etat_connection){
-        System.out.println("Le bavard "+this.get_nom()+" est connecté au potin");
+            System.out.println("Le bavard "+this.get_nom()+" est connecté au potin");
+            Object source = new Object();
+            OnLineBavardEvent ob= new OnLineBavardEvent(source, ActionEvent.ACTION_PERFORMED, "command",this);
+            ob.get_message();
         }
         else{
             System.out.println("Le bavard "+this.get_nom()+" n'est pas connecté au potin");
