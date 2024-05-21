@@ -21,8 +21,9 @@ public class Test {
         batiment.souscription_potin();
         Object source = new Object();
         emma.transmettre_potin(new PapotageEvent(source, ActionEvent.ACTION_PERFORMED, "command","thomas", "pas de nouvelles",emma));
+        System.out.println(charlotte.get_messages().toString());
 
-        BatimentInterface bi = new BatimentInterface();
+        //BatimentInterface bi = new BatimentInterface();
     }
 
 }
