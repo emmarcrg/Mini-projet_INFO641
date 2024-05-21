@@ -8,7 +8,7 @@ public class Test {
         Concierge cyprien=new Concierge("Cyprien");
 
         // Création du batiment
-        Batiment batiment = new Batiment("PotinLand", cyprien);
+        Batiment batiment=new Batiment("PotinLand", cyprien);
 
         // Création de nouveaux bavards
         Bavard charlotte=new Bavard("Charlotte", cyprien);
@@ -27,10 +27,6 @@ public class Test {
 
 
         // à faire : extend PapotageListener dans ConciergeInterface pour qu'il puisse détecter l'arrivée des noveaux messages
-
-        // modification d'un Bavard : booleen interet s'il veut savoir ce qui se passe 
-
-
 
         // Lancement de l'interface :
 

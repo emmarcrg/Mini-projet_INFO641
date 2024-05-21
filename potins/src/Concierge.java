@@ -11,6 +11,7 @@ public class Concierge {
         
         this.nom=nom;
         messages=new HashMap<Bavard, String>();
+        liste_bavards= new ArrayList<>();
     }
 
     // Gestion des bavards

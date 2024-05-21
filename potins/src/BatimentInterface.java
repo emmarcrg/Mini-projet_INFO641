@@ -225,7 +225,7 @@ public class BatimentInterface extends JFrame implements PapotageListener{
         // on créé l'affichage pour le concierge
         Color couleur_affichage=Color.decode("#e5f4e3");
         zone_affichage.setBackground(couleur_affichage);
-        JTextField nom_concierge = new JTextField(batiment.get_concierge().get_prenom());
+        JTextField nom_concierge = new JTextField(batiment.get_concierge().get_nom());
         nom_concierge.setBorder(null);
         nom_concierge.setEditable(false);
         nom_concierge.setFocusable(false);
@@ -265,6 +265,12 @@ public class BatimentInterface extends JFrame implements PapotageListener{
     public void recevoir_potin(PapotageEvent potin) {
         String nouveau_message=potin.print_message();
         System.out.println(nouveau_message);       
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
 
 }
