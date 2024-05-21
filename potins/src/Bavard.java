@@ -1,3 +1,5 @@
+import java.awt.event.ActionEvent;
+
 public class Bavard implements PapotageListener {
     private Concierge concierge;
     private String nom;
@@ -25,5 +27,11 @@ public class Bavard implements PapotageListener {
 
     public void seConnecter(){
         BavardInterface bav = new BavardInterface(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        //this.recevoir_potin();
+        System.out.println("Le bavard affiche le message");
     }
 }

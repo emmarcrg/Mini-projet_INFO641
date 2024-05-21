@@ -43,7 +43,8 @@ public class BavardInterface extends JFrame {
                 String sujet = sujetArea.getText();
                 String description = descriptionArea.getText();
                 if (!sujet.isEmpty() && !description.isEmpty()) {
-                    bavard.transmettre_potin(new PapotageEvent(sujet, description));
+                    Object source = new Object();
+                    bavard.transmettre_potin(new PapotageEvent(source,  ActionEvent.ACTION_PERFORMED, "command", sujet, description));
                     sujetArea.setText("");
                     descriptionArea.setText("");
                 } else {
