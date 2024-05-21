@@ -22,4 +22,8 @@ public class Bavard implements PapotageListener {
     public String get_nom(){
         return this.nom;
     }
+
+    public void seConnecter(){
+        BavardInterface bav = new BavardInterface(this);
+    }
 }

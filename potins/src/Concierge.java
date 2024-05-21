@@ -2,9 +2,11 @@ import java.util.ArrayList;
 
 public class Concierge {
     private ArrayList<Bavard> liste_bavards;
+    private String nom;
 
-    public Concierge(){
+    public Concierge(String nom){
         this.liste_bavards=new ArrayList<>();
+        this.nom=nom;
     }
 
     // Gestion des bavards

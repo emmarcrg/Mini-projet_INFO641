@@ -10,7 +10,7 @@ public class BatimentInterface extends JFrame {
     private JPanel bavardPanel;   
 
     public BatimentInterface() {
-        Concierge cyprien=new Concierge();
+        Concierge cyprien=new Concierge("cyprien");
         bat = new Batiment("PotinLand", cyprien);
         setTitle("Interface du Bâtiment");
         setSize(400, 300);
@@ -57,13 +57,32 @@ public class BatimentInterface extends JFrame {
                 }
             }
         );
+
+        JButton connectButton = new JButton("Connecter");
+        connectButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String name = bavardNameField.getText();
+                if (!name.isEmpty()) {
+                    for (Bavard bavard : bavards) {
+                        if (bavard.get_nom().equals(name)) {
+                            // Connecter le bavard
+                            bavard.seConnecter();
+                            // Autres actions à effectuer après la connexion
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+
         addBavardPanel.add(new JLabel("Nom du Bavard: "));
         addBavardPanel.add(bavardNameField);
         addBavardPanel.add(addButton);
         add(addBavardPanel, BorderLayout.NORTH);
 
         setVisible(true);
-    }
+        }
 
     private void addBavardToPanel(Bavard bavard) {
         JLabel bavardLabel = new JLabel(bavard.get_nom());
