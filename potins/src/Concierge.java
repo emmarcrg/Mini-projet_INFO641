@@ -21,6 +21,11 @@ public class Concierge {
         this.liste_bavards.add(nouveau_bavard);
     }
 
+    public void deplacer_bavard_debut_liste(Bavard premier_bavard){
+        this.liste_bavards.remove(premier_bavard);
+        this.liste_bavards.add(0, premier_bavard);
+    }
+
     public void suprimer_bavard(Bavard ancier_bavard){
         this.liste_bavards.remove(ancier_bavard);
     }
