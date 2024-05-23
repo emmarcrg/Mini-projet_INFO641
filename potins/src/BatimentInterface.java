@@ -1,12 +1,10 @@
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map.Entry;
+
 
 public class BatimentInterface extends JFrame implements PapotageListener{ 
     final static int HAUTEUR=500;
@@ -438,10 +436,5 @@ public class BatimentInterface extends JFrame implements PapotageListener{
         throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
 
-    @Override
-    public void transmettre_potin(PapotageEvent potin) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'transmettre_potin'");
-    }
 
 }
