@@ -1,16 +1,18 @@
+import java.util.List;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 
 public class Concierge {
     private ArrayList<Bavard> liste_bavards;
     private String nom;
-    private HashMap <Bavard, String> messages;
+    private ArrayList <Bavard> bavards;
+    private ArrayList <String> messages;
 
     public Concierge(String nom){
         
         this.nom=nom;
-        messages=new HashMap<Bavard, String>();
+        this.bavards=new ArrayList<Bavard>();
+        this.messages=new ArrayList<String>();
         liste_bavards= new ArrayList<>();
     }
 
@@ -26,7 +28,8 @@ public class Concierge {
     // Gestion de la reception des messages
     public void recevoir_potin(PapotageEvent potin) {
         //System.out.println("Message reçu : "+potin.print_message());
-        messages.put(potin.getEnvoyeur(), potin.print_message());
+        bavards.add(potin.getEnvoyeur());
+        messages.add(potin.affichage_simple());
         transmettre_potin(potin);
     }
 
@@ -38,11 +41,38 @@ public class Concierge {
         }
     }
 
-    public HashMap<Bavard,String> get_messages(){
-        return this.messages;
+    public String get_messages(){
+        String res="";
+        for(int i=0;i<bavards.size();i++){
+            res+=bavards.get(i).get_nom() + " : ";
+            res+=messages.get(i).toString()+ "; ";
+        }
+        return res;
+    }
+
+    public String get_message(int index){
+        return bavards.get(index).get_nom() + " : " + messages.get(index).toString();
+    }
+
+    public int get_nombre_message(){
+        return messages.size();
     }
 
     public String get_nom(){
         return this.nom;
     }
+
+    public ArrayList<Bavard> get_liste_bavards(){
+        return this.liste_bavards;
+    }
+
+    public String[] get_nom_bavards(){
+        List<String> noms_bavards=new ArrayList<>();
+        for (Bavard bavard : liste_bavards){
+            noms_bavards.add(bavard.get_nom());
+        }
+        String[] bavards=noms_bavards.toArray(new String[0]);
+        return bavards;
+    }
+
 }
