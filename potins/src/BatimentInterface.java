@@ -394,8 +394,28 @@ public class BatimentInterface extends JFrame implements PapotageListener{
         texte_message.setForeground(couleur_texte);
         zone_affichage_message.add(texte_message);
 
-        
-        String affichage = bavard_selectionne.get_messages();
+        //On laisse l'opportunité au bavard de sélectionner les personnes dont il veut les messages.
+        //Le menu déroulant : 
+        JComboBox<String> choix_messages=new JComboBox<>(liste_bavards);
+        texte_message.add(choix_messages);
+        choix_bavard.setForeground(Color.decode("#488286"));
+        choix_bavard.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                // Récupérer l'option sélectionnée
+                String selection_nom_bavard=(String) choix_bavard.getSelectedItem();
+                System.out.println("Bavard sélectionnée : " + selection_nom_bavard);
+                ArrayList<Bavard> liste_bavard=batiment.get_concierge().get_liste_bavards();
+                for (Bavard bavard : liste_bavard){
+                    System.out.println(selection_nom_bavard);
+                    if (bavard.get_nom().equals(selection_nom_bavard) ){
+                        Bavard bavard_selectionne=bavard;
+                    }
+                }
+            };
+        });
+        //Les messages affichés en fonction
+        String affichage = bavard_selectionne.get_messages_bavard(bavard_selectionne);
         JPanel panel_message=new JPanel();
         panel_message.setBackground(couleur_affichage);
         JTextField message_recu=new JTextField(affichage);
