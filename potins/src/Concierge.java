@@ -21,6 +21,11 @@ public class Concierge {
         this.liste_bavards.add(nouveau_bavard);
     }
 
+    public void deplacer_bavard_debut_liste(Bavard premier_bavard){
+        this.liste_bavards.remove(premier_bavard);
+        this.liste_bavards.add(0, premier_bavard);
+    }
+
     public void suprimer_bavard(Bavard ancier_bavard){
         this.liste_bavards.remove(ancier_bavard);
     }
@@ -29,7 +34,7 @@ public class Concierge {
     public void recevoir_potin(PapotageEvent potin) {
         //System.out.println("Message reçu : "+potin.print_message());
         bavards.add(potin.getEnvoyeur());
-        messages.add(potin.print_message());
+        messages.add(potin.affichage_simple());
         transmettre_potin(potin);
     }
 
@@ -48,6 +53,14 @@ public class Concierge {
             res+=messages.get(i).toString()+ "; ";
         }
         return res;
+    }
+
+    public String get_message(int index){
+        return bavards.get(index).get_nom() + " : " + messages.get(index).toString();
+    }
+
+    public int get_nombre_message(){
+        return messages.size();
     }
 
     public String get_nom(){

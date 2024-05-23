@@ -29,7 +29,6 @@ public class Test {
         // à faire : extend PapotageListener dans ConciergeInterface pour qu'il puisse détecter l'arrivée des noveaux messages
 
         // Lancement de l'interface :
-        
         BatimentInterface bat = new BatimentInterface(batiment);
         System.out.println("Ouverture de l'interface graphique");
         bat.setVisible(true); 

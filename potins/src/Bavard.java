@@ -29,7 +29,7 @@ public class Bavard implements PapotageListener {
     public void recevoir_potin(PapotageEvent message_recu){
         if (this.connecte){
             bavards.add(message_recu.getEnvoyeur());
-            messages.add( message_recu.print_message());
+            messages.add( message_recu.affichage_simple());
             System.out.println(message_recu.print_message());
         }
         // si le bavard ne veut pas être connecté on fait rien
@@ -74,6 +74,14 @@ public class Bavard implements PapotageListener {
         return res;
     }
 
+    public String get_message(int index){
+        return bavards.get(index).get_nom() + " : " + messages.get(index).toString();
+    }
+
+    public int get_nombre_message(){
+        return messages.size();
+    }
+
     public String get_messages_bavard(Bavard b){
         String res="";
         res+=b.get_nom() + " : ";
@@ -85,3 +93,4 @@ public class Bavard implements PapotageListener {
         return res;
     }
 }
+
