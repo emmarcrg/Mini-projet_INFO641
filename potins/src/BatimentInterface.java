@@ -282,7 +282,7 @@ public class BatimentInterface extends JFrame implements PapotageListener{
         Color couleur_texte=Color.decode("#513b56");
         zone_affichage.setBackground(couleur_affichage);
         JPanel affichage_bavard=new JPanel();
-        affichage_bavard.setBackground(couleur_texte);
+        affichage_bavard.setBackground(couleur_affichage);
         affichage_bavard.setLayout(new BoxLayout(affichage_bavard, BoxLayout.Y_AXIS));
 
         JPanel zone_bavard=new JPanel();
@@ -290,6 +290,7 @@ public class BatimentInterface extends JFrame implements PapotageListener{
         zone_bavard.setBackground(couleur_affichage);
         // zone d'envoie d'un message
         JPanel zone_envoie_message=new JPanel();
+        zone_envoie_message.setPreferredSize(new Dimension(600, 50));
         Color couleur_message=Color.decode("#EAC3CA");
         zone_envoie_message.setBackground(couleur_message);
        
@@ -297,6 +298,7 @@ public class BatimentInterface extends JFrame implements PapotageListener{
         // zone d'affichage des messages reçus :
         JPanel zone_message=new JPanel();
         zone_message.setBackground(couleur_affichage);
+        zone_message.setPreferredSize(new Dimension(600, 300));
         // chaque message est affiché en dessous de l'autre
         zone_message.setLayout(new BoxLayout(zone_message, BoxLayout.Y_AXIS));
         
@@ -369,9 +371,9 @@ public class BatimentInterface extends JFrame implements PapotageListener{
             }
         });
         zone_envoie_message.add(envoyer);
-        affichage_bavard.add(zone_envoie_message);
         //zone_affichage.add(zone_envoie_message);                  
         JLabel texte_message=new JLabel("Messagerie : ");
+        texte_message.setForeground(couleur_texte);
         zone_affichage_message.add(texte_message);
 
         for (Entry<Bavard, String> message_bavard : bavard_selectionne.get_messages().entrySet()){
@@ -388,12 +390,11 @@ public class BatimentInterface extends JFrame implements PapotageListener{
             zone_message.add(panel_message);
         }
 
+        affichage_bavard.add(zone_bavard);
+        affichage_bavard.add(zone_envoie_message);
         zone_affichage_message.add(zone_message);
         affichage_bavard.add(zone_affichage_message);
-
         zone_bavard.add(choix_bavard);
-        affichage_bavard.add(zone_bavard);
-        
         zone_affichage.add(affichage_bavard);
         zone_affichage.revalidate();
         zone_affichage.repaint();
