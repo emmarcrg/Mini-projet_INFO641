@@ -5,8 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map.Entry;
 
 public class BatimentInterface extends JFrame implements PapotageListener{ 
     final static int HAUTEUR=500;
@@ -54,6 +52,8 @@ public class BatimentInterface extends JFrame implements PapotageListener{
         zone_choix.add(bouton_concierge);
 
         JButton bouton_bavards = new JButton("Bavards");
+        // on lance automatiquement l'interface pour le 1e bavard de la liste
+        bavard_selectionne=batiment.get_concierge().get_liste_bavards().get(0);
         bouton_bavards.setForeground(couleur_choix);
         bouton_bavards.addActionListener(new ActionListener() {
             @Override
@@ -125,6 +125,8 @@ public class BatimentInterface extends JFrame implements PapotageListener{
                         }
                     }
                 }
+                // on remet l'interface à jour
+                afficher_zone_batiment();
             };
         });
 
@@ -278,8 +280,6 @@ public class BatimentInterface extends JFrame implements PapotageListener{
         panel_message.add(message_recu);
         zone_message.add(panel_message);
         
-
-
         zone_affichage_messages.add(zone_message);
         zone_affichage.add(zone_affichage_messages);
         zone_affichage.revalidate();
@@ -338,16 +338,15 @@ public class BatimentInterface extends JFrame implements PapotageListener{
                 for (Bavard bavard : liste_bavard){
                     System.out.println(selection_nom_bavard);
                     if (bavard.get_nom().equals(selection_nom_bavard)){
-                        Bavard bavard_selectionne=bavard;
+                        final Bavard bavard_selectionne=bavard;
                     }
                 }
             };
         });
         if (bavard_selectionne==null){
-            System.out.println("Pas de bavard selectionné");
-        }
-        else{
-        
+            // Normalement cela ne devrait pas arriver mais on re récupère le 1e bavard de la liste
+           bavard_selectionne=batiment.get_concierge().get_liste_bavards().get(0);
+        }        
         // maintenant qu'on a recupéré le bavard selectionné, on va pouvoir afficher ses informations :
         // on affiche son état de connection
         if (bavard_selectionne.get_connection()) {
@@ -377,16 +376,17 @@ public class BatimentInterface extends JFrame implements PapotageListener{
         JButton envoyer=new JButton("Envoyer");
         envoyer.setForeground(couleur_texte);
         envoyer.setBackground(couleur_message);
+        final Bavard selection_bavard = bavard_selectionne;
         envoyer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                System.out.println("Un message a été envoyé par "+ bavard_selectionne.get_nom());
+                System.out.println("Un message a été envoyé par "+ selection_bavard.get_nom());
                 // on récupère le texte entré dans les JTextArea :
                 String sujet=sujet_message.getText();
                 String contenu=message.getText();
-                bavard_selectionne.transmettre_potin(new PapotageEvent(new Object(), ActionEvent.ACTION_PERFORMED, "command", sujet, contenu, bavard_selectionne));
+                selection_bavard.transmettre_potin(new PapotageEvent(new Object(), ActionEvent.ACTION_PERFORMED, "command", sujet, contenu, selection_bavard));
                 // on remet à jour l'interface
-                afficher_zone_bavards(bavard_selectionne);
+                afficher_zone_bavards(selection_bavard);
             }
         });
         zone_envoie_message.add(envoyer);
@@ -417,7 +417,6 @@ public class BatimentInterface extends JFrame implements PapotageListener{
         zone_affichage.add(affichage_bavard);
         zone_affichage.revalidate();
         zone_affichage.repaint();
-    }
     }
 
 //.......//

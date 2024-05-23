@@ -37,6 +37,7 @@ public class Batiment {
         Bavard nouveau_bavard=new Bavard(nom, concierge);
         habitants.add(nouveau_bavard);
         System.out.println("Un nouveau bavard a été ajouté au batiment");
+        concierge.ajouter_bavard(nouveau_bavard);
     }
 
     public ArrayList<Bavard> get_habitants(){
