@@ -26,6 +26,7 @@ public class Bavard implements PapotageListener {
     public void recevoir_potin(PapotageEvent message_recu){
         messages.put( message_recu.getEnvoyeur(), message_recu.print_message());
         System.out.println(message_recu.print_message());
+        System.out.println(messages.toString());
     }
 
     public String get_nom(){
