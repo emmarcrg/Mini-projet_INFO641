@@ -1,17 +1,20 @@
 import java.awt.event.ActionEvent;
-import java.util.HashMap;
+import java.util.ArrayList;
+
 
 
 public class Bavard implements PapotageListener {
     private Concierge concierge;
     private String nom;
     private Boolean connecte;
-    private HashMap <Bavard, String> messages;
+    private ArrayList <Bavard> bavards;
+    private ArrayList <String> messages;
 
     public Bavard(String nom, Concierge concierge){
         this.nom=nom;
         this.concierge=concierge;
-        messages=new HashMap<Bavard, String>();
+        this.bavards=new ArrayList<Bavard>();
+        this.messages=new ArrayList<String>();
         this.connecte=false;
     }
 
@@ -25,9 +28,9 @@ public class Bavard implements PapotageListener {
     
     public void recevoir_potin(PapotageEvent message_recu){
         if (this.connecte){
-            messages.put( message_recu.getEnvoyeur(), message_recu.print_message());
+            bavards.add(message_recu.getEnvoyeur());
+            messages.add( message_recu.print_message());
             System.out.println(message_recu.print_message());
-            System.out.println(messages.toString());
         }
         // si le bavard ne veut pas être connecté on fait rien
     }
@@ -62,8 +65,13 @@ public class Bavard implements PapotageListener {
         System.out.println("Le bavard affiche le message");
     }
 
-    public HashMap<Bavard,String> get_messages(){
-        return this.messages;
+    public String get_messages(){
+        String res="";
+        for(int i=0;i<bavards.size();i++){
+            res+=bavards.get(i).get_nom() + " : ";
+            res+=messages.get(i).toString()+ "; ";
+        }
+        return res;
     }
 
 }
