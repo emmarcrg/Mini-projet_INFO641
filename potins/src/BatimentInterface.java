@@ -66,6 +66,9 @@ public class BatimentInterface extends JFrame implements PapotageListener{
         Color couleur_affichage=Color.decode("#e5f4e3");
         zone_affichage.setBackground(couleur_affichage);
         zone_affichage.setPreferredSize(new Dimension(600, 400));
+        JLabel message=new JLabel("Bienvenue dans l'interface des Potins ! Selectionnez l'interface que vous voulez afficher.");
+        message.setForeground(couleur_choix);
+        zone_affichage.add(message);
         fond.add(zone_affichage);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
@@ -269,16 +272,19 @@ public class BatimentInterface extends JFrame implements PapotageListener{
         zone_message.setBackground(couleur_zone_concierge);
         zone_message.setLayout(new BoxLayout(zone_message, BoxLayout.Y_AXIS));
 
-        JPanel panel_message=new JPanel(new FlowLayout(FlowLayout.LEFT));
-        panel_message.setBackground(couleur_zone_concierge);
-        JTextField message_recu=new JTextField(concierge.get_messages());
-        message_recu.setBorder(null);
-        message_recu.setEditable(false);
-        message_recu.setFocusable(false);
-        message_recu.setForeground(couleur_texte_concierge);
-        message_recu.setBackground(couleur_zone_concierge);
-        panel_message.add(message_recu);
-        zone_message.add(panel_message);
+
+        for (int i=0; i<concierge.get_nombre_message();i++ ){
+            JPanel panel_message=new JPanel(new FlowLayout(FlowLayout.LEFT));
+            panel_message.setBackground(couleur_zone_concierge);
+            JTextField message_recu=new JTextField(concierge.get_message(i));
+            message_recu.setBorder(null);
+            message_recu.setEditable(false);
+            message_recu.setFocusable(false);
+            message_recu.setForeground(couleur_texte_concierge);
+            message_recu.setBackground(couleur_zone_concierge);
+            panel_message.add(message_recu);
+            zone_message.add(panel_message);
+        }
         
         zone_affichage_messages.add(zone_message);
         zone_affichage.add(zone_affichage_messages);
@@ -338,9 +344,12 @@ public class BatimentInterface extends JFrame implements PapotageListener{
                 for (Bavard bavard : liste_bavard){
                     System.out.println(selection_nom_bavard);
                     if (bavard.get_nom().equals(selection_nom_bavard)){
-                        final Bavard bavard_selectionne=bavard;
+                        Bavard bavard_selectionne=bavard;
+                        // on remet l'affichage à jour après avoir selectionné le bavard
+                        afficher_zone_bavards(bavard_selectionne);
                     }
                 }
+                
             };
         });
         if (bavard_selectionne==null){
@@ -390,23 +399,24 @@ public class BatimentInterface extends JFrame implements PapotageListener{
             }
         });
         zone_envoie_message.add(envoyer);
-        //zone_affichage.add(zone_envoie_message);                  
+        zone_affichage.add(zone_envoie_message);                  
         JLabel texte_message=new JLabel("Messagerie : ");
         texte_message.setForeground(couleur_texte);
         zone_affichage_message.add(texte_message);
 
         
-        String affichage = bavard_selectionne.get_messages();
-        JPanel panel_message=new JPanel();
-        panel_message.setBackground(couleur_affichage);
-        JTextField message_recu=new JTextField(affichage);
-        message_recu.setBorder(null);
-        message_recu.setEditable(false);
-        message_recu.setFocusable(false);
-        message_recu.setForeground(couleur_texte);
-        message_recu.setBackground(couleur_affichage);
-        panel_message.add(message_recu);
-        zone_message.add(panel_message);
+        for (int i=0; i<bavard_selectionne.get_nombre_message();i++ ){
+            JPanel panel_message=new JPanel(new FlowLayout(FlowLayout.LEFT));
+            panel_message.setBackground(couleur_texte_message);
+            JTextField message_recu=new JTextField(bavard_selectionne.get_message(i));
+            message_recu.setBorder(null);
+            message_recu.setEditable(false);
+            message_recu.setFocusable(false);
+            message_recu.setForeground(couleur_texte);
+            message_recu.setBackground(couleur_texte_message);
+            panel_message.add(message_recu);
+            zone_message.add(panel_message);
+        }
         
 
         affichage_bavard.add(zone_bavard);
@@ -425,7 +435,7 @@ public class BatimentInterface extends JFrame implements PapotageListener{
     public void recevoir_potin(PapotageEvent potin) {
         for (Bavard habitant : batiment.get_habitants()){
             if (habitant.get_connection() && habitant!=potin.getEnvoyeur()){
-                String nouveau_message=potin.print_message();
+                String nouveau_message=potin.affichage_simple();
                 System.out.println(nouveau_message);
             } 
         }   

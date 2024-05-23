@@ -29,7 +29,7 @@ public class Concierge {
     public void recevoir_potin(PapotageEvent potin) {
         //System.out.println("Message reçu : "+potin.print_message());
         bavards.add(potin.getEnvoyeur());
-        messages.add(potin.print_message());
+        messages.add(potin.affichage_simple());
         transmettre_potin(potin);
     }
 
@@ -48,6 +48,14 @@ public class Concierge {
             res+=messages.get(i).toString()+ "; ";
         }
         return res;
+    }
+
+    public String get_message(int index){
+        return bavards.get(index).get_nom() + " : " + messages.get(index).toString();
+    }
+
+    public int get_nombre_message(){
+        return messages.size();
     }
 
     public String get_nom(){
