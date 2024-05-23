@@ -27,9 +27,12 @@ public class Bavard implements PapotageListener {
     }
     
     public void recevoir_potin(PapotageEvent message_recu){
-        bavards.add(message_recu.getEnvoyeur());
-        messages.add( message_recu.print_message());
-        System.out.println(message_recu.print_message());
+        if (this.connecte){
+            bavards.add(message_recu.getEnvoyeur());
+            messages.add( message_recu.print_message());
+            System.out.println(message_recu.print_message());
+        }
+        // si le bavard ne veut pas être connecté on fait rien
     }
 
     public String get_nom(){
