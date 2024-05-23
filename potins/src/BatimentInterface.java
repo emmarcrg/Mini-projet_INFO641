@@ -25,6 +25,7 @@ public class BatimentInterface extends JFrame implements PapotageListener{
         fond.setBackground(couleur_fond);
         this.getContentPane().add(fond, BorderLayout.CENTER);
 
+
         // Zone de choix de l'interface à afficher
         JPanel zone_choix = new JPanel();
         Color couleur_choix = Color.decode("#488286");
@@ -57,7 +58,7 @@ public class BatimentInterface extends JFrame implements PapotageListener{
         bouton_bavards.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                afficher_zone_bavards();
+                afficher_zone_bavards(bavard_selectionne);
             }
         });
         zone_choix.add(bouton_bavards);
@@ -290,7 +291,7 @@ public class BatimentInterface extends JFrame implements PapotageListener{
         System.out.println("Affichage de l'interface Bavards");
         this.setTitle("Gestion des potins - Bavards");
         zone_affichage.removeAll();
-
+        
         // on créé l'affichage pour les bavards
         Color couleur_affichage=Color.decode("#e5f4e3");
         Color couleur_texte=Color.decode("#513b56");
@@ -342,6 +343,10 @@ public class BatimentInterface extends JFrame implements PapotageListener{
                 }
             };
         });
+        if (bavard_selectionne==null){
+            System.out.println("Pas de bavard selectionné");
+        }
+        else{
         
         // maintenant qu'on a recupéré le bavard selectionné, on va pouvoir afficher ses informations :
         // on affiche son état de connection
@@ -390,19 +395,19 @@ public class BatimentInterface extends JFrame implements PapotageListener{
         texte_message.setForeground(couleur_texte);
         zone_affichage_message.add(texte_message);
 
-        for (Entry<Bavard, String> message_bavard : bavard_selectionne.get_messages().entrySet()){
-            String affichage=message_bavard.getKey().get_nom()+" : "+  message_bavard.getValue();
-            JPanel panel_message=new JPanel();
-            panel_message.setBackground(couleur_affichage);
-            JTextField message_recu=new JTextField(affichage);
-            message_recu.setBorder(null);
-            message_recu.setEditable(false);
-            message_recu.setFocusable(false);
-            message_recu.setForeground(couleur_texte);
-            message_recu.setBackground(couleur_affichage);
-            panel_message.add(message_recu);
-            zone_message.add(panel_message);
-        }
+        
+        String affichage = bavard_selectionne.get_messages();
+        JPanel panel_message=new JPanel();
+        panel_message.setBackground(couleur_affichage);
+        JTextField message_recu=new JTextField(affichage);
+        message_recu.setBorder(null);
+        message_recu.setEditable(false);
+        message_recu.setFocusable(false);
+        message_recu.setForeground(couleur_texte);
+        message_recu.setBackground(couleur_affichage);
+        panel_message.add(message_recu);
+        zone_message.add(panel_message);
+        
 
         affichage_bavard.add(zone_bavard);
         affichage_bavard.add(zone_envoie_message);
@@ -412,6 +417,7 @@ public class BatimentInterface extends JFrame implements PapotageListener{
         zone_affichage.add(affichage_bavard);
         zone_affichage.revalidate();
         zone_affichage.repaint();
+    }
     }
 
 //.......//
