@@ -12,9 +12,11 @@ public class BatimentInterface extends JFrame implements PapotageListener{
     private JPanel zone_affichage;
     private Bavard bavard_selectionne;
     private Batiment batiment;
+    private String[] liste_themes;
     
-    public BatimentInterface(Batiment bat) {
+    public BatimentInterface(Batiment bat, String[] liste_themes) {
         this.batiment=bat;
+        this.liste_themes=liste_themes;
         this.setSize(LARGEUR, HAUTEUR);
         this.setTitle("Gestion des potins");
             
@@ -360,6 +362,10 @@ public class BatimentInterface extends JFrame implements PapotageListener{
         zone_envoie_message.setPreferredSize(new Dimension(600, 50));
         Color couleur_fond_texte_message=Color.decode("#EAC3CA");
         zone_envoie_message.setBackground(couleur_fond_texte_message);
+        JComboBox<String> theme_message=new  JComboBox<>(liste_themes);
+        theme_message.setForeground(couleur_texte);
+        theme_message.setBackground(couleur_fond_texte_message);
+        zone_envoie_message.add(theme_message);
         JTextArea sujet_message=new JTextArea("Entrez le sujet du message");
         sujet_message.setForeground(couleur_texte);
         sujet_message.setBackground(couleur_fond_texte_message);
@@ -368,7 +374,6 @@ public class BatimentInterface extends JFrame implements PapotageListener{
         message.setForeground(couleur_texte);
         message.setBackground(couleur_fond_texte_message);
         zone_envoie_message.add(message);
-
         JButton envoyer=new JButton("Envoyer");
         envoyer.setForeground(couleur_texte);
         envoyer.setBackground(couleur_fond_texte_message);
@@ -377,10 +382,12 @@ public class BatimentInterface extends JFrame implements PapotageListener{
             @Override
             public void actionPerformed(ActionEvent e){
                 System.out.println("Un message a été envoyé par "+ selection_bavard.get_nom());
+                // on récupère le thème du message
+                String theme=(String) theme_message.getSelectedItem();
                 // on récupère le texte entré dans les JTextArea :
                 String sujet=sujet_message.getText();
                 String contenu=message.getText();
-                selection_bavard.transmettre_potin(new PapotageEvent(new Object(), ActionEvent.ACTION_PERFORMED, "command", sujet, contenu, selection_bavard));
+                selection_bavard.transmettre_potin(new PapotageEvent(new Object(), ActionEvent.ACTION_PERFORMED, "command", theme, sujet, contenu, selection_bavard));
                 // on remet à jour l'interface
                 afficher_zone_bavards(selection_bavard);
             }

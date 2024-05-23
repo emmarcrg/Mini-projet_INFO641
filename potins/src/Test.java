@@ -21,15 +21,12 @@ public class Test {
         batiment.souscription_potin();
         
         Object source = new Object();
-        emma.transmettre_potin(new PapotageEvent(source, ActionEvent.ACTION_PERFORMED, "command","thomas", "pas de nouvelles",emma));
-        charlotte.transmettre_potin(new PapotageEvent(source, ActionEvent.ACTION_PERFORMED, "command","pmb", "ils sont tous nul", charlotte));
-        //System.out.println("potin : " +cyprien.get_potin());*/
-
-
-        // à faire : extend PapotageListener dans ConciergeInterface pour qu'il puisse détecter l'arrivée des noveaux messages
-
+        emma.transmettre_potin(new PapotageEvent(source, ActionEvent.ACTION_PERFORMED, "command","potins", "thomas", "pas de nouvelles",emma));
+        charlotte.transmettre_potin(new PapotageEvent(source, ActionEvent.ACTION_PERFORMED, "command","potins", "pmb", "ils sont tous nul", charlotte));
+        
+        String[] liste_themes={"potins", "sport", "cours", "sorties", "vacances", "autre"};
         // Lancement de l'interface :
-        BatimentInterface bat = new BatimentInterface(batiment);
+        BatimentInterface bat=new BatimentInterface(batiment, liste_themes);
         System.out.println("Ouverture de l'interface graphique");
         bat.setVisible(true);
 
