@@ -2,7 +2,7 @@ import java.awt.event.ActionEvent;
 
 public class Test {
     public static void main(String[] args) throws Exception {
-        /*System.out.println("Bienvenue dans le batiment où tous les potins sont permis");   
+        System.out.println("Bienvenue dans le batiment où tous les potins sont permis");   
 
         // Création du concierge
         Concierge cyprien=new Concierge("Cyprien");
@@ -29,11 +29,10 @@ public class Test {
         // à faire : extend PapotageListener dans ConciergeInterface pour qu'il puisse détecter l'arrivée des noveaux messages
 
         // Lancement de l'interface :
-        Concierge cyprien=new Concierge("Cyprien");
-        Batiment batiment=new Batiment("PotinLand", cyprien);
+        
         BatimentInterface bat = new BatimentInterface(batiment);
         System.out.println("Ouverture de l'interface graphique");
-        bat.setVisible(true);
+        bat.setVisible(true); 
 
 
     }

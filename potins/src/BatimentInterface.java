@@ -321,8 +321,8 @@ public class BatimentInterface extends JFrame implements PapotageListener{
         // chaque zone_message est affichée en dessous de l'autre
         zone_affichage_message.setLayout(new BoxLayout(zone_affichage_message, BoxLayout.Y_AXIS));
 
-        // on choisi le bavard qu'on veut et on affiche son état de connection
 
+        // on choisi le bavard qu'on veut et on affiche son état de connection
         String[] liste_bavards=batiment.get_concierge().get_nom_bavards();
         JComboBox<String> choix_bavard=new JComboBox<>(liste_bavards);
         zone_bavard.add(choix_bavard);
@@ -337,7 +337,7 @@ public class BatimentInterface extends JFrame implements PapotageListener{
                 for (Bavard bavard : liste_bavard){
                     System.out.println(selection_nom_bavard);
                     if (bavard.get_nom().equals(selection_nom_bavard)){
-                        final Bavard bavard_selectionne=bavard;
+                        Bavard bavard_selectionne=bavard;
                     }
                 }
             };
@@ -396,10 +396,12 @@ public class BatimentInterface extends JFrame implements PapotageListener{
 
         //On laisse l'opportunité au bavard de sélectionner les personnes dont il veut les messages.
         //Le menu déroulant : 
+        JPanel selection_message = new JPanel();
         JComboBox<String> choix_messages=new JComboBox<>(liste_bavards);
-        texte_message.add(choix_messages);
-        choix_bavard.setForeground(Color.decode("#488286"));
-        choix_bavard.addActionListener(new ActionListener() {
+        selection_message.add(choix_messages);
+        choix_messages.setForeground(Color.decode("#488286"));
+        Bavard bavard_messager;
+        choix_messages.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
                 // Récupérer l'option sélectionnée
@@ -409,24 +411,26 @@ public class BatimentInterface extends JFrame implements PapotageListener{
                 for (Bavard bavard : liste_bavard){
                     System.out.println(selection_nom_bavard);
                     if (bavard.get_nom().equals(selection_nom_bavard) ){
-                        Bavard bavard_selectionne=bavard;
+                        Bavard bavard_messager=bavard;
+                        String affichage_messages = bavard_messager.get_messages_bavard(bavard_messager);
+                        JPanel panel_messages=new JPanel();
+                        panel_messages.setBackground(couleur_affichage);
+                        JTextField message_recu=new JTextField(affichage_messages);
+                        message_recu.setBorder(null);
+                        message_recu.setEditable(false);
+                        message_recu.setFocusable(false);
+                        message_recu.setForeground(couleur_texte);
+                        message_recu.setBackground(couleur_affichage);
+                        panel_messages.add(message_recu);
+                        selection_message.add(panel_messages);
                     }
+                    
                 }
             };
         });
+        zone_message.add(selection_message);
         //Les messages affichés en fonction
-        String affichage = bavard_selectionne.get_messages_bavard(bavard_selectionne);
-        JPanel panel_message=new JPanel();
-        panel_message.setBackground(couleur_affichage);
-        JTextField message_recu=new JTextField(affichage);
-        message_recu.setBorder(null);
-        message_recu.setEditable(false);
-        message_recu.setFocusable(false);
-        message_recu.setForeground(couleur_texte);
-        message_recu.setBackground(couleur_affichage);
-        panel_message.add(message_recu);
-        zone_message.add(panel_message);
-        
+       
 
         affichage_bavard.add(zone_bavard);
         affichage_bavard.add(zone_envoie_message);
