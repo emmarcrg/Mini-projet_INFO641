@@ -6,11 +6,11 @@ public class PapotageEvent extends ActionEvent {
     private String theme;
     private Bavard envoyeur;
 
-    public PapotageEvent(Object source, int id, String command, String sj, String cp, String theme,  Bavard envoyeur){
+    public PapotageEvent(Object source, int id, String command, String theme, String sj, String cp,  Bavard envoyeur){
         super(source, id, command);
+        this.theme=theme;
         this.sujet=sj;
         this.corps=cp;
-        this.theme=theme;
         this.envoyeur=envoyeur;
     }
     public PapotageEvent(Object source, int id, String command){
