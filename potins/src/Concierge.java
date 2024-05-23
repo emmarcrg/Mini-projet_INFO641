@@ -6,12 +6,14 @@ import java.util.HashMap;
 public class Concierge {
     private ArrayList<Bavard> liste_bavards;
     private String nom;
-    private HashMap <Bavard, String> messages;
+    private ArrayList <Bavard> bavards;
+    private ArrayList <String> messages;
 
     public Concierge(String nom){
         
         this.nom=nom;
-        messages=new HashMap<Bavard, String>();
+        this.bavards=new ArrayList<Bavard>();
+        this.messages=new ArrayList<String>();
         liste_bavards= new ArrayList<>();
     }
 
@@ -27,7 +29,8 @@ public class Concierge {
     // Gestion de la reception des messages
     public void recevoir_potin(PapotageEvent potin) {
         //System.out.println("Message reçu : "+potin.print_message());
-        messages.put(potin.getEnvoyeur(), potin.print_message());
+        bavards.add(potin.getEnvoyeur());
+        messages.add(potin.print_message());
         transmettre_potin(potin);
     }
 
@@ -39,8 +42,13 @@ public class Concierge {
         }
     }
 
-    public HashMap<Bavard,String> get_messages(){
-        return this.messages;
+    public String get_messages(){
+        String res="";
+        for(int i=0;i<bavards.size();i++){
+            res+=bavards.get(i).get_nom() + " : ";
+            res+=messages.get(i).toString()+ "; ";
+        }
+        return res;
     }
 
     public String get_nom(){
