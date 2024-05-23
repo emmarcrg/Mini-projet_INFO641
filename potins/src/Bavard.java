@@ -74,4 +74,15 @@ public class Bavard implements PapotageListener {
         return res;
     }
 
+    public String get_messages_bavard(Bavard b){
+        String res="";
+        res+=b.get_nom() + " : ";
+        for(int i=0;i<bavards.size();i++){
+            if(b.equals(bavards.get(i))){
+                res+=messages.get(i).toString()+ "; ";
+            }
+        }
+        return res;
+    }
+
 }
