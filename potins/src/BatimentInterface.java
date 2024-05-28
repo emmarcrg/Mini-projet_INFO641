@@ -487,6 +487,7 @@ public class BatimentInterface extends JFrame implements PapotageListener{
         //Zone d'affichage des messages correspondant au thème
         JPanel zone_affichage_theme=new JPanel();
         zone_affichage_theme.setBackground(couleur_zone_messages);
+        zone_affichage_theme.setLayout(new BoxLayout(zone_affichage_theme, BoxLayout.Y_AXIS));
 
         for (int i=0; i<bavard_selectionne.get_nombre_message();i++ ){
             String message_traite=bavard_selectionne.get_message(i);
