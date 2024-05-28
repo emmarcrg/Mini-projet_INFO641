@@ -506,7 +506,10 @@ public class BatimentInterface extends JFrame implements PapotageListener{
             }
         }
         zone_theme.add(zone_affichage_theme);
-        
+
+        JPanel zone_tri_message=new JPanel();
+        zone_tri_message.setBackground(couleur_affichage);
+
         //On laisse l'opportunité au bavard de sélectionner les personnes dont il veut les messages.
         //Le menu déroulant : 
         JPanel selection_message = new JPanel();
@@ -545,12 +548,13 @@ public class BatimentInterface extends JFrame implements PapotageListener{
                 
             };
         });
-        zone_message.add(selection_message);  
+        zone_tri_message.add(selection_message);  
 
         
         // ajout des élémennt dans l'affichage final
         affichage_bavard.add(zone_message);
         affichage_bavard.add(zone_theme);
+        affichage_bavard.add(zone_tri_message);
         zone_affichage.add(affichage_bavard);
         zone_affichage.revalidate();
         zone_affichage.repaint();           
