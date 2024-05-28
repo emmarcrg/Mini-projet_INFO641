@@ -17,10 +17,10 @@ public class PapotageEvent extends ActionEvent {
         super(source, id, command);
     }
 
-    public void setMessage (String sj, String cp, String theme){
+    public void setMessage (String theme, String sj, String cp){
+        this.theme=theme;
         this.sujet=sj;
         this.corps=cp;
-        this.theme=theme;
     }
 
     public String print_message (){
