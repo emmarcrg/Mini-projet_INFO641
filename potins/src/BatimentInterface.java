@@ -399,58 +399,11 @@ public class BatimentInterface extends JFrame implements PapotageListener{
 
         JLabel texte_message=new JLabel("Messagerie : ");
         texte_message.setForeground(couleur_texte);
+        zone_message.add(texte_message);
 
         for (int i=0; i<bavard_selectionne.get_nombre_message();i++ ){
             JPanel panel_message=new JPanel(new FlowLayout(FlowLayout.CENTER));
-        //On laisse l'opportunité au bavard de sélectionner les personnes dont il veut les messages.
-        //Le menu déroulant : 
-        JPanel selection_message = new JPanel();
-        JComboBox<String> choix_messages=new JComboBox<>(liste_bavards);
-        selection_message.add(choix_messages);
-        choix_messages.setForeground(Color.decode("#488286"));
-        Bavard bavard_messager;
-        choix_messages.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e){
-                // Récupérer l'option sélectionnée
-                String selection_nom_bavard=(String) choix_bavard.getSelectedItem();
-                System.out.println("Bavard sélectionnée : " + selection_nom_bavard);
-                ArrayList<Bavard> liste_bavard=batiment.get_concierge().get_liste_bavards();
-                for (Bavard bavard : liste_bavard){
-                    System.out.println(selection_nom_bavard);
-                    if (bavard.get_nom().equals(selection_nom_bavard) ){
-                        Bavard bavard_messager=bavard;
-                        String affichage_messages = bavard_messager.get_messages_bavard(bavard_messager);
-                        JPanel panel_messages=new JPanel();
-                        panel_messages.setBackground(couleur_affichage);
-                        JTextField message_recu=new JTextField(affichage_messages);
-                        message_recu.setBorder(null);
-                        message_recu.setEditable(false);
-                        message_recu.setFocusable(false);
-                        message_recu.setForeground(couleur_texte);
-                        message_recu.setBackground(couleur_affichage);
-                        panel_messages.add(message_recu);
-                        selection_message.add(panel_messages);
-                    }
-                    
-                }
-            };
-        });
-        zone_message.add(selection_message);
-        //Les messages affichés en fonction
-       
-
-        affichage_bavard.add(zone_bavard);
-        affichage_bavard.add(zone_envoie_message);
-
-        affichage_bavard.add(zone_message);
-        zone_bavard.add(choix_bavard);
-        zone_affichage.add(affichage_bavard);
-        zone_affichage.revalidate();
-        zone_affichage.repaint();
-    }
-
-    panel_message.setBackground(couleur_zone_messages);
+            panel_message.setBackground(couleur_zone_messages);
             JTextField message_recu=new JTextField(bavard_selectionne.get_message(i));
             message_recu.setBorder(null);
             message_recu.setEditable(false);
@@ -460,6 +413,57 @@ public class BatimentInterface extends JFrame implements PapotageListener{
             panel_message.add(message_recu);
             zone_message.add(panel_message);
         }
+        //On laisse l'opportunité au bavard de sélectionner les personnes dont il veut les messages.
+        //Le menu déroulant : 
+        JPanel selection_message = new JPanel();
+        selection_message.setBackground(couleur_affichage);
+        JComboBox<String> choix_messages=new JComboBox<>(liste_bavards);
+        selection_message.add(choix_messages);
+        choix_messages.setForeground(Color.decode("#488286"));
+        
+        choix_messages.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){ //--> Le mettre dans une fonction à part?
+                // Récupérer l'option sélectionnée
+                String selection_nom_bavard=(String) choix_bavard.getSelectedItem();
+                System.out.println("Bavard sélectionnée : " + selection_nom_bavard);
+                ArrayList<Bavard> liste_bavard=batiment.get_concierge().get_liste_bavards();
+                
+                for (Bavard bavard : liste_bavard){
+                    JPanel panel_messages=new JPanel();
+                    if (bavard.get_nom().equals(selection_nom_bavard) ){
+                        Bavard bavard_messager=bavard;
+                        String messages = bavard_messager.get_messages_bavard(bavard_messager);
+                        panel_messages.setLayout(new BoxLayout(panel_messages, BoxLayout.Y_AXIS));
+                        panel_messages.setBackground(couleur_affichage);
+                        JTextField message_recu=new JTextField(messages);
+                        message_recu.setBorder(null);
+                        message_recu.setEditable(false);
+                        message_recu.setFocusable(false);
+                        message_recu.setForeground(couleur_texte);
+                        message_recu.setBackground(couleur_affichage);
+                        panel_messages.add(message_recu);
+                    }
+                    panel_messages.revalidate();
+                    panel_messages.repaint();
+                    selection_message.add(panel_messages);
+                }
+                
+            };
+        });
+        zone_message.add(selection_message);  
+        affichage_bavard.add(zone_message);
+        zone_affichage.add(affichage_bavard);
+        zone_affichage.revalidate();
+        zone_affichage.repaint();           
+    
+
+           
+        }
+
+    
+
+        
 
 //.......//
 
